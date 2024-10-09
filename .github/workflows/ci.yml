@@ -1,11 +1,10 @@
 name: Teste Tecnico
-on: 
-    push:
-        branches:
-            - develop
-    pull_request:
-        branches:
-            - main
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - 'releases/**'
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
