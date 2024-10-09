@@ -15,7 +15,7 @@
     -  **`cypress/support`**:  Arquivos de suporte, como comandos customizados (ex: `cy.login()`),  configurações globais e  utilidades. 
         *  Embora o Cypress facilite a escrita de código limpo, tornando o uso de Page Objects menos crucial, a decisão de utilizá-los ou não dependerá da complexidade dos testes e da preferência da equipe. A estrutura do projeto estará preparada para se adaptar a diferentes abordagens.
 * **Cenários de Testes:** Definir e implementar casos de teste relevantes que demonstrem o uso eficaz do Cypress para interagir com a interface do Mantis, por exemplo o login e criar tarefas.
-* **Relatório da Execução:** Configurar a geração de relatórios de teste para fornecer feedback claro sobre os resultados da execução dos testes.
+* **Relatório da Execução:** A integração contínua com GitHub Actions gera relatórios básicos no próprio log de execução, permitindo acompanhar o status dos testes. Você poderá ver quais testes passaram, falharam ou foram ignorados, além do tempo de execução.
 
 ### Execução dos Testes Localmente
 
