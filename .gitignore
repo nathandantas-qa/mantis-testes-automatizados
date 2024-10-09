@@ -1,0 +1,7 @@
+cypress/videos/
+cypress/screenshots/
+cypress/reports/
+cypress/results/
+.cypress_cache/
+coverage/
+node_modules/
