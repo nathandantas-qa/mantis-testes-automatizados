@@ -17,6 +17,7 @@ describe('template spec', () => {
     cy.get('.width-40').click({ force: true });
 
     cy.url().should('include', 'index.php');
+    
     cy.url({ timeout: 10000 }).should('include', 'my_view_page.php');
   })
 })
