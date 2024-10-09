@@ -36,3 +36,20 @@
    ```bash
    npx cypress open 
    ```
+
+### Integração Contínua com GitHub Actions
+
+Este projeto utiliza GitHub Actions para automatizar a execução dos testes em cada **push para a branch `develop` e em Pull Requests para a `main`**.  
+
+**Para visualizar os resultados dos testes:**
+
+1. Acesse a página do repositório no GitHub.
+2. Clique na aba "Actions".
+3. Selecione o workflow "Teste Técnico" (ou o nome do workflow que você configurou).
+4. Você poderá ver o histórico de execuções, o status dos testes e os logs detalhados.
+
+**Benefícios da CI:**
+
+- **Execução Automática:**  Os testes são executados automaticamente em cada push, garantindo que o código esteja funcionando corretamente.
+- **Feedback Rápido:**  A equipe recebe feedback imediato sobre o status dos testes, o que permite identificar e corrigir problemas rapidamente.
+- **Cobertura de Testes:**  A CI garante que os testes sejam executados em todas as branches relevantes, aumentando a cobertura de testes e a qualidade do código.
