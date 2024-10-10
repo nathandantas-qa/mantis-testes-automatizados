@@ -8,6 +8,9 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
+    env:
+        USERNAME: ${{ vars.USERNAME }}
+        PASSWORD: ${{ secrets.PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

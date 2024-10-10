@@ -66,6 +66,35 @@ Este projeto utiliza GitHub Actions para automatizar a execução dos testes em 
 3. Selecione o workflow "Teste Técnico" (ou o nome do workflow que você configurou).
 4. Você poderá ver o histórico de execuções, o status dos testes e os logs detalhados.
 
+**Configuração de Variáveis de Ambiente:**
+
+Para executar os testes no GitHub Actions, você precisa configurar as variáveis de ambiente:
+
+1. **Acesse a página do seu repositório no GitHub.**
+2. **Clique na aba "Settings".**
+3. **Selecione "Secrets" no menu lateral.**
+4. **Clique em "Add a new secret".**
+5. **Insira o nome da variável de ambiente (ex: `USERNAME`, `PASSWORD`) e o valor.**
+6. **Clique em "Add secret".**
+
+No arquivo `ci.yml`, você pode acessar as variáveis de ambiente usando a sintaxe `${{ secrets.<nome-da-variável> }}`.  Por exemplo:
+
+```yaml
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    env:
+      USERNAME: ${{ secrets.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Run Cypress tests
+        run: npx cypress run
+```
+
 **Benefícios da CI:**
 
 - **Execução Automática:**  Os testes são executados automaticamente em cada push, garantindo que o código esteja funcionando corretamente.
