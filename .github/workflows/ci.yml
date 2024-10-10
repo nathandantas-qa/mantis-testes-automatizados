@@ -5,13 +5,12 @@ on:
       - main
       - develop
       - 'releases/**'
-  workflow_dispatch:
-  
+env:
+  USERNAME: ${{ vars.VAR_USERNAME }} 
+  PASSWORD: ${{ vars.VAR_PASSWORD }}
+
 jobs:
   cypress-run:
-    env:
-        USERNAME: ${{ vars.VAR_USERNAME }} 
-        PASSWORD: ${{ vars.VAR_PASSWORD }}
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -19,10 +18,9 @@ jobs:
       # Install npm dependencies, cache them correctly
       # and run all Cypress tests
       - run: echo "USERNAME is $USERNAME"
+      - run: echo "PASSWORD is $PASSWORD"
       - name: Cypress run
         uses: cypress-io/github-action@v6
-        
-     
       - uses: actions/upload-artifact@v4
         # add the line below to store screenshots only on failures
         if: failure()
