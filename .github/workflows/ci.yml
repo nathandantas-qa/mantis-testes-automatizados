@@ -5,12 +5,14 @@ on:
       - main
       - develop
       - 'releases/**'
+  workflow_dispatch:
+  
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     env:
-        USERNAME: ${{ secrets.USERNAME }} 
-        PASSWORD: ${{ secrets.PASSWORD }}
+        USERNAME: ${{ secrets.SECRET_USERNAME }} 
+        PASSWORD: ${{ secrets.SECRET_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
