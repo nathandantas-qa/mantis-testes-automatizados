@@ -9,18 +9,20 @@ on:
   
 jobs:
   cypress-run:
+    env:
+        USERNAME: ${{ secrets.SECRET_USERNAME }} 
+        PASSWORD: ${{ secrets.SECRET_PASSWORD }}
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       # Install npm dependencies, cache them correctly
       # and run all Cypress tests
+      - run: echo "USERNAME is $USERNAME"
       - name: Cypress run
         uses: cypress-io/github-action@v6
-        env:
-          USERNAME: ${{ secrets.SECRET_USERNAME }} 
-          PASSWORD: ${{ secrets.SECRET_PASSWORD }}
-      - run: echo "USERNAME is $USERNAME"
+        
+     
       - uses: actions/upload-artifact@v4
         # add the line below to store screenshots only on failures
         if: failure()
