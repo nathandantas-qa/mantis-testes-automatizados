@@ -1,6 +1,6 @@
 ## Changelog
 
-### [Próxima Versão] - Data a definir
+### [0.1.1] - 10/10/2024 
 
 #### Adicionado
 - Testes de login no Mantis com três abordagens de estrutura de código:

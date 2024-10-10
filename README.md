@@ -80,19 +80,21 @@ Para executar os testes no GitHub Actions, você precisa configurar as variávei
 No arquivo `ci.yml`, você pode acessar as variáveis de ambiente usando a sintaxe `${{ secrets.<nome-da-variável> }}`.  Por exemplo:
 
 ```yaml
-jobs:
-  cypress-run:
-    runs-on: ubuntu-22.04
-    env:
-      USERNAME: ${{ secrets.USERNAME }}
-      PASSWORD: ${{ secrets.PASSWORD }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install dependencies
-        run: npm install
-      - name: Run Cypress tests
-        run: npx cypress run
+name: Teste Tecnico
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - 'releases/**'
+env:
+  USERNAME: ${{ vars.VAR_USERNAME }} 
+  PASSWORD: ${{ vars.VAR_PASSWORD }}
+  SECRET_USERNAME: ${{ secrets.SECRET_USERNAME }} 
+  SECRET_PASSWORD: ${{ secrets.SECRET_PASSWORD }}
+  CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }} 
+  CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+  
 ```
 
 **Benefícios da CI:**
