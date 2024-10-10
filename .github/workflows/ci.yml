@@ -10,7 +10,7 @@ on:
 jobs:
   cypress-run:
     env:
-        USERNAME: ${{ secrets.SECRET_USERNAME }} 
+        USERNAME: ${{ vars.VAR_USERNAME }} 
         PASSWORD: ${{ secrets.SECRET_PASSWORD }}
     runs-on: ubuntu-22.04
     steps:
