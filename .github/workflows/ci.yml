@@ -11,7 +11,7 @@ jobs:
   cypress-run:
     env:
         USERNAME: ${{ vars.VAR_USERNAME }} 
-        PASSWORD: ${{ secrets.SECRET_PASSWORD }}
+        PASSWORD: ${{ vars.VAR_PASSWORD }}
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
