@@ -8,7 +8,11 @@ on:
 env:
   USERNAME: ${{ vars.VAR_USERNAME }} 
   PASSWORD: ${{ vars.VAR_PASSWORD }}
-
+  SECRET_USERNAME: ${{ secrets.SECRET_USERNAME }} 
+  SECRET_PASSWORD: ${{ secrets.VAR_PASSWORD }}
+  CYPRESS_USERNAME: ${{ secrets.VAR_USERNAME }} 
+  CYPRESS_PASSWORD: ${{ secrets.VAR_PASSWORD }}
+  
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
@@ -21,6 +25,10 @@ jobs:
         run: npm install
       - run: echo "USERNAME is $USERNAME"
       - run: echo "PASSWORD is $PASSWORD"
+      - run: echo "SECRET_USERNAME is $SECRET_USERNAME"
+      - run: echo "SECRET_PASSWORD is $SECRET_PASSWORD"
+      - run: echo "CYPRESS_USERNAME is $CYPRESS_USERNAME"
+      - run: echo "CYPRESS_PASSWORD is $CYPRESS_PASSWORD"
       - name: Cypress run
         uses: cypress-io/github-action@v6
       - uses: actions/upload-artifact@v4
