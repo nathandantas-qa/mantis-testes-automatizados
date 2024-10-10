@@ -22,13 +22,6 @@ jobs:
       # and run all Cypress tests
       - name: Install dependencies
         run: npm install
-      - name: Load .env
-        run: |
-          echo "## Running on ${{ runner.os }}"
-          echo "## Using node version ${{ runner.nodeVersion }}"
-          npm install dotenv
-          dotenv -e .env
-      
       - run: echo "USERNAME is $USERNAME"
       - run: echo "PASSWORD is $PASSWORD"
       - name: Cypress run
