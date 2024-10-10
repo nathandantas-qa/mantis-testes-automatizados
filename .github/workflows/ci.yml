@@ -10,7 +10,7 @@ env:
   PASSWORD: ${{ vars.VAR_PASSWORD }}
   CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
   CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }} 
-  PASSWORD2: ${{ secrets.SECRET_PASSWORD}}
+  PASSWORD2: ${{ secrets.PASSWORD2}}
 
 jobs:
   cypress-run:
