@@ -10,7 +10,14 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+ Cypress.Commands.add('login', () => { 
+    describe('Login no Mantis', () => {
+        cy.get('#username').should('be.visible').type(Cypress.env('USERNAME'));
+        cy.get('.width-40').click({ force: true });
+        cy.get('#password').should('be.visible').type(Cypress.env('PASSWORD'), { log: false });
+        cy.get('.width-40').click({ force: true });        
+  })
+})
 //
 //
 // -- This is a child command --
