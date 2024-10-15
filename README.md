@@ -13,9 +13,27 @@
     - **`cypress/e2e`**: Armazenará os arquivos de teste, organizados por funcionalidade (ex: login, criar tarefa).
     - **`cypress/fixtures`**: Conterá dados de teste reutilizáveis, como informações de usuários ou tarefas, em formato JSON ou JavaScript, que poderão ser importados nos testes para evitar repetições e facilitar a manutenção.
     -  **`cypress/support`**:  Arquivos de suporte, como comandos customizados (ex: `cy.login()`),  configurações globais e  utilidades. 
-        *  Embora o Cypress facilite a escrita de código limpo, tornando o uso de Page Objects menos crucial, a decisão de utilizá-los ou não dependerá da complexidade dos testes e da preferência da equipe. A estrutura do projeto estará preparada para se adaptar a diferentes abordagens.
-* **Cenários de Testes:** Definir e implementar casos de teste relevantes que demonstrem o uso eficaz do Cypress para interagir com a interface do Mantis, por exemplo o login e criar tarefas.
-* **Relatório da Execução:** A integração contínua com GitHub Actions gera relatórios básicos no próprio log de execução, permitindo acompanhar o status dos testes. Você poderá ver quais testes passaram, falharam ou foram ignorados, além do tempo de execução.
+
+**Cenários de Testes:**
+
+Este projeto explora três abordagens para a estrutura do código de teste do login no Mantis:
+
+**1. Estrutura Simples:**
+
+- **Objetivo:** Demonstrar a implementação básica de testes de login, com todos os comandos do Cypress (cy) executados no mesmo script.
+- **Exemplo:**  O arquivo `cypress/e2e/login.cy.js` contém o exemplo de teste de login com estrutura simples.
+
+**2. Estrutura com Custom Commands:**
+
+- **Objetivo:**  Demonstrar a utilização de comandos customizados para evitar repetição de código e melhorar a legibilidade dos testes.
+- **Exemplo:**  O arquivo `cypress/support/commands.js` contém o comando customizado `cy.login()`, que é utilizado no arquivo `cypress/e2e/login.cy.js` para simplificar a escrita dos testes.
+
+**3. Estrutura com Page Object:**
+
+- **Objetivo:** Demonstrar a aplicação do padrão Page Object para organizar o código de forma mais modular e reutilizável.
+- **Exemplo:**  A classe `LoginPage` em `cypress/support/pageObjects/login/index.js` define os métodos para interagir com a página de login, enquanto o arquivo `cypress/e2e/login.cy.js` utiliza a classe `LoginPage` para executar os testes.
+
+**Relatório da Execução:** A integração contínua com GitHub Actions gera relatórios básicos no próprio log de execução, permitindo acompanhar o status dos testes. Você poderá ver quais testes passaram, falharam ou foram ignorados, além do tempo de execução.
 
 ### Execução dos Testes Localmente
 
@@ -47,6 +65,37 @@ Este projeto utiliza GitHub Actions para automatizar a execução dos testes em 
 2. Clique na aba "Actions".
 3. Selecione o workflow "Teste Técnico" (ou o nome do workflow que você configurou).
 4. Você poderá ver o histórico de execuções, o status dos testes e os logs detalhados.
+
+**Configuração de Variáveis de Ambiente:**
+
+Para executar os testes no GitHub Actions, você precisa configurar as variáveis de ambiente:
+
+1. **Acesse a página do seu repositório no GitHub.**
+2. **Clique na aba "Settings".**
+3. **Selecione "Secrets" no menu lateral.**
+4. **Clique em "Add a new secret".**
+5. **Insira o nome da variável de ambiente (ex: `USERNAME`, `PASSWORD`) e o valor.**
+6. **Clique em "Add secret".**
+
+No arquivo `ci.yml`, você pode acessar as variáveis de ambiente usando a sintaxe `${{ secrets.<nome-da-variável> }}`.  Por exemplo:
+
+```yaml
+name: Teste Tecnico
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - 'releases/**'
+env:
+  USERNAME: ${{ vars.VAR_USERNAME }} 
+  PASSWORD: ${{ vars.VAR_PASSWORD }}
+  SECRET_USERNAME: ${{ secrets.SECRET_USERNAME }} 
+  SECRET_PASSWORD: ${{ secrets.SECRET_PASSWORD }}
+  CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }} 
+  CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+  
+```
 
 **Benefícios da CI:**
 
