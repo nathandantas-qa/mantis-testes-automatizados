@@ -3,12 +3,6 @@
 ### [0.1.1] - 10/10/2024 
 
 #### Adicionado
-- Criação do teste para login inválido [feature/CT02-login-invalido]
-- Atualização da documentação do Readme.md, adicionado Estratégia de Testes [feature/planejar-tarefas]
-
-### [0.1.1] - 10/10/2024 
-
-#### Adicionado
 - Testes de login no Mantis com três abordagens de estrutura de código:
     - **Estrutura Simples:**  Todos os comandos do Cypress (cy) são executados no mesmo script.
     - **Estrutura com Custom Commands:**  Utilização de custom commands para evitar repetição de código.
