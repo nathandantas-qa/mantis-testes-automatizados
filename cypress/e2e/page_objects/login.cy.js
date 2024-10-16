@@ -6,6 +6,8 @@ const loginPage = new Login()
 const myViewPage = new MyViewPage();
 
 describe('Login no Mantis', () => {
+ 
+  let language = Cypress.env('LANGUAGE') || 'pt-BR';  
 
   beforeEach(() => {
     cy.fixture('users').as('users');
@@ -26,7 +28,7 @@ describe('Login no Mantis', () => {
         loginPage.visit()
         .fillFormAndSubmit(users.username_invalid, users.password_invalid);
        
-        loginPage.verifyErrorMessage(messages.loginErrorMessage);        
+        loginPage.verifyErrorMessage(messages.loginErrorMessage[language]);        
       })
     })
   });

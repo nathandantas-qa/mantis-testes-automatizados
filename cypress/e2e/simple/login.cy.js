@@ -4,11 +4,12 @@
 
 describe('Login no Mantis', () => {
 
-  const url_login = '/login_page.php';  
+  const url_login = '/login_page.php';
+  let language = Cypress.env('LANGUAGE') || 'pt-BR';   
 
   beforeEach(() => {
     cy.fixture('users').as('users');
-    cy.fixture('messages').as('messages');
+    cy.fixture('messages').as('messages');    
   });
 
   it('CT01 - deve logar com sucesso', () => {    
@@ -32,7 +33,10 @@ describe('Login no Mantis', () => {
     
         cy.get('.alert-danger > p')
           .should('be.visible')
-          .and('contain', messages.loginErrorMessage);
+          .invoke('text') // Obtem o texto do elemento
+          .then((text) => {
+            expect(text).to.equal(messages.loginErrorMessage[language]); 
+          });
       }); 
     }); 
   })        

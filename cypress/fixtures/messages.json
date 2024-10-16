@@ -1,3 +1,6 @@
 {
-    "loginErrorMessage": "Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos."
+    "loginErrorMessage": {
+        "pt-br": "Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos.",
+        "en": "Your account may be disabled or blocked or the username/password you entered is incorrect."
+    }
 }

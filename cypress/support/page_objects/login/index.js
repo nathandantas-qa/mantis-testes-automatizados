@@ -44,7 +44,10 @@ class LoginPage {
     verifyErrorMessage(text) {
       cy.get(loginErrorMessageSelector)
       .should('be.visible')
-      .and('contain', text);
+      .invoke('text') // Obtem o texto do elemento
+      .then((text) => {
+        expect(text).to.equal(text); 
+      });
       return this;
     }
 

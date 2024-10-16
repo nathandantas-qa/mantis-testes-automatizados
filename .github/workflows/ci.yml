@@ -12,6 +12,7 @@ env:
   SECRET_PASSWORD: ${{ secrets.SECRET_PASSWORD }}
   CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }} 
   CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+  LANGUAGE: ${{vars.VAR_LANGUAGE}}
   
 jobs:
   cypress-run:
