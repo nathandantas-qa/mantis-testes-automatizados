@@ -35,6 +35,52 @@ Este projeto explora três abordagens para a estrutura do código de teste do lo
 
 **Relatório da Execução:** A integração contínua com GitHub Actions gera relatórios básicos no próprio log de execução, permitindo acompanhar o status dos testes. Você poderá ver quais testes passaram, falharam ou foram ignorados, além do tempo de execução.
 
+### Estratégia de Testes
+
+Este projeto utiliza testes automatizados para garantir a qualidade do sistema MantisBT. O foco principal é a priorização dos testes, demonstrando a capacidade de aplicar boas práticas de automação e a abordagem right-left.
+
+**Contexto do Teste Técnico:**
+
+Como este é um projeto de desafio, e não há requisitos específicos de negócio ou acesso a dados de produção para aplicar técnicas de teste como particionamento de equivalência, análise do valor limite e tabela de decisão, os casos de teste a seguir foram gerados por IA. Os valores preenchidos para os itens FC, FUC, AI e AP também foram preenchidos por IA para fins didáticos. Em um projeto real, o ideal é consultar o Product Owner (PO) e os dados de monitoramento da aplicação para obter mais precisão.
+
+**Tipos de Testes:**
+
+- **Testes de UI (End-to-End):** Simulam o comportamento de um usuário real, interagindo com a interface do usuário.
+- **Testes de API:** Validam a API REST do MantisBT, utilizando requisições HTTP.
+
+**Casos de Teste (CT):**
+
+| Caso de Teste (CT)                                               | Tipo        | FC | FUC | AI | AP | Prioridade | Status       |
+|-------------------------------------------------------------------|-------------|----|-----|----|----|------------|--------------|
+| CT01 - Login com sucesso (UI)                                    | UI          | 5  | 5   | 5  | 5  | **125**     | Completo    |
+| CT03 - Criar tarefa com campos obrigatórios (UI)                 | UI          | 5  | 5   | 5  | 3  | **75**      | Em Andamento | 
+| CT05 - Criar tarefa via API (campos obrigatórios)                | API         | 5  | 5   | 5  | 3  | **75**      | A Fazer     |
+| CT02 - Login com credenciais inválidas (UI)                       | UI          | 3  | 4   | 5  | 3  | **52.5**    | A Fazer     |
+| CT15 - Editar usuário via API                                   | API         | 4  | 2   | 4  | 3  | **36**      | A Fazer     |
+| CT06 - Criar tarefa via API (todos os campos)                     | API         | 4  | 4   | 4  | 2  | **32**      | A Fazer     |
+| CT09 - Visualizar tarefas (UI)                                   | UI          | 4  | 4   | 4  | 2  | **32**      | A Fazer     |
+| CT10 - Obter lista de tarefas via API                            | API         | 4  | 4   | 4  | 2  | **32**      | A Fazer     |
+| CT08 - Tentar criar tarefa via API (dados inválidos)             | API         | 3  | 2   | 4  | 3  | **30**      | A Fazer     |
+| CT16 - Atualizar privilégios de usuário via API                  | API         | 4  | 1   | 4  | 3  | **30**      | A Fazer     |
+| CT04 - Tentar criar tarefa com campos obrigatórios vazios (UI)   | UI          | 4  | 3   | 4  | 2  | **28**      | A Fazer     |
+| CT07 - Tentar criar tarefa via API (campos obrigatórios vazios)  | API         | 4  | 3   | 4  | 2  | **28**      | A Fazer     |
+| CT12 - Editar tarefa (UI)                                       | UI          | 4  | 3   | 4  | 2  | **28**      | A Fazer     | 
+| CT13 - Editar tarefa via API                                     | API         | 4  | 3   | 4  | 2  | **28**      | A Fazer     |
+| CT17 - Adicionar perfil (UI)                                    | UI          | 3  | 2   | 3  | 2  | **15**      | A Fazer     | 
+| CT18 - Editar perfil (UI)                                       | UI          | 3  | 2   | 3  | 2  | **15**      | A Fazer     | 
+| CT11 - Obter tarefa por ID via API                               | API         | 3  | 3   | 3  | 1  | **9**       | A Fazer     |
+
+**Critérios para Automação:**
+
+- **Funcionalidade Crítica (FC):** Quão essencial é a funcionalidade para o funcionamento do sistema? (1-5, sendo 5 o mais crítico)
+- **Fluxo de Usuário Comum (FUC):** Com que frequência os usuários utilizam essa funcionalidade? (1-5, sendo 5 o mais comum)
+- **Área de Impacto (AI):** Qual o impacto de um erro nesta funcionalidade no sistema como um todo? (1-5, sendo 5 o maior impacto)
+- **Área de Probabilidade (AP):** Qual a probabilidade de erros ocorrerem nesta funcionalidade? (1-5, sendo 5 a maior probabilidade)
+
+**Priorização:**
+
+A prioridade de automação é calculada usando a seguinte fórmula: **(FC + FUC) / 2 * AI * AP**
+
 ### Execução dos Testes Localmente
 
 1. **Clone este repositório:** 
