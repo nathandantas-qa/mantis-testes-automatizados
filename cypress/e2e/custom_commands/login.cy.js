@@ -29,7 +29,7 @@ describe('Login no Mantis', () => {
             .should('be.visible')
             .invoke('text') // Obtem o texto do elemento
             .then((text) => {
-              expect(text).to.equal(messages.loginErrorMessage[Cypress.env('LANGUAGE')]); 
+              expect(messages.loginErrorMessage[Cypress.env('LANGUAGE')]).to.equal(text); 
             });
             
         })        

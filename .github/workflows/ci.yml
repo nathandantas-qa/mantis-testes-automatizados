@@ -8,14 +8,18 @@ on:
 env:
   USERNAME: ${{ secrets.LOGIN_USER }}
   PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-  LANGUAGE: ${{ vars.LANGUAGE }}  
+  LANGUAGE: ${{ vars.LANGUAGE }} 
+  CYPRESS_USERNAME: ${{ secrets.LOGIN_USER }} 
+  CYPRESS_PASSWORD: ${{ secrets.LOGIN_PASSWORD }} 
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
-      - run: echo "USERNAME is $USERNAME"
-      - run: echo "PASSWORD is $PASSWORD"
-      - run: echo "USERNAME is $LANGUAGE"
+      - run: echo "secrets.LOGIN_USER is $USERNAME"
+      - run: echo "secrets.LOGIN_PASSWORD is $PASSWORD"
+      - run: echo "vars.LANGUAGE is $LANGUAGE"
+      - run: echo "CYPRESS_USERNAME->secrets.LOGIN_USER is $CYPRESS_USERNAME"
+      - run: echo "CYPRESS_PASSWORD->secrets.LOGIN_PASSWORD is $CYPRESS_PASSWORD"
       - name: Checkout
         uses: actions/checkout@v4
       # Install npm dependencies, cache them correctly
@@ -25,6 +29,8 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
+          CYPRESS_USERNAME: ${{ secrets.LOGIN_USER }} 
+          CYPRESS_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
           USERNAME: ${{ secrets.LOGIN_USER }}
           PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
           LANGUAGE: ${{ vars.LANGUAGE }}  

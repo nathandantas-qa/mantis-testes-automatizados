@@ -41,12 +41,12 @@ class LoginPage {
       submitPassword();       
     }
 
-    verifyErrorMessage(text) {
+    verifyErrorMessage(expect) {
       cy.get(loginErrorMessageSelector, { timeout: 10000 })
       .should('be.visible')
       .invoke('text') // Obtem o texto do elemento
       .then((text) => {
-        expect(text).to.equal(text); 
+        expect(expect).to.equal(text); 
       });
       return this;
     }
