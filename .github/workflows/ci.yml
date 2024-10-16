@@ -5,10 +5,6 @@ on:
       - main
       - develop
       - 'releases/**'
-env:
-  USERNAME: ${{ vars.VAR_USERNAME }}
-  PASSWORD: ${{ secrets.SECRET_PASSWORD }}
-  LANGUAGE: ${{ vars.VAR_LANGUAGE }}
   
 jobs:
   cypress-run:
@@ -23,9 +19,9 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
-          USERNAME: ${{ secrets.VAR_USERNAME }}
-          PASSWORD: ${{ secrets.SECRET_PASSWORD }}
-          LANGUAGE: ${{ secrets.VAR_LANGUAGE }}
+          USERNAME: ${{ vars.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          LANGUAGE: ${{ vars.LANGUAGE }}
 
       - uses: actions/upload-artifact@v4
         # add the line below to store screenshots only on failures
