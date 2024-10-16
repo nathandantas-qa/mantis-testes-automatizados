@@ -5,30 +5,26 @@ on:
       - main
       - develop
       - 'releases/**'
-env:
-  T_USERNAME: ${{ vars.LOGIN_USER }}
-  T_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-  T_LANGUAGE: ${{ vars.LANGUAGE }} 
 
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
-      - run: echo "vars.LOGIN_USER is $USERNAME"
-      - run: echo "secrets.LOGIN_PASSWORD is $PASSWORD"
-      - run: echo "vars.LANGUAGE is $LANGUAGE"
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
+     
       - name: Install dependencies
         run: npm install
+
+      - name: Write the cypress.env.json file 📝
+        # use quotes around the secret, as its value
+        # is simply inserted as a string into the command
+        run: |
+          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json  
+      
       - name: Cypress run
         uses: cypress-io/github-action@v6
-        env:
-          USERNAME: ${{ vars.LOGIN_USER }}
-          PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-          LANGUAGE: ${{ vars.LANGUAGE }}  
+        
       - uses: actions/upload-artifact@v4
         # add the line below to store screenshots only on failures
         if: failure()
@@ -36,6 +32,7 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+      
       - uses: actions/upload-artifact@v4
         with:
           name: cypress-videos
