@@ -3,6 +3,7 @@
 ### [Próxima Versão] - Data a definir
 
 #### Adicionado
+- Criação do teste para login inválido [feature/CT02-login-invalido]
 - Atualização da documentação do Readme.md, adicionado Estratégia de Testes [feature/planejar-tarefas]
 
 ### [0.1.1] - 10/10/2024 

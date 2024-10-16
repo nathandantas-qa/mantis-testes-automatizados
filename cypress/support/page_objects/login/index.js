@@ -2,7 +2,8 @@ import MyViewPage from '../my_view_page';
 import {
     usernameFieldSelector,
     passwordFieldSelector,
-    loginButtonSelector
+    loginButtonSelector,
+    loginErrorMessageSelector
   } from './selectors'
 
 class LoginPage {
@@ -31,14 +32,21 @@ class LoginPage {
     }
 
     fillFormAndSubmit(
-        username = Cypress.env('USERNAME'),
-        password = Cypress.env('PASSWORD')
-      ) {
-        this.setUsername(username). 
-        submitUsername().       
-        setPassword(password).
-        submitPassword();       
-      }
+      username = Cypress.env('USERNAME'),
+      password = Cypress.env('PASSWORD')
+    ) {
+      this.setUsername(username). 
+      submitUsername().       
+      setPassword(password).
+      submitPassword();       
+    }
+
+    verifyErrorMessage(text) {
+      cy.get(loginErrorMessageSelector)
+      .should('be.visible')
+      .and('contain', text);
+      return this;
+    }
 
   }
 
