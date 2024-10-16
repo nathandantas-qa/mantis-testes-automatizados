@@ -5,11 +5,17 @@ on:
       - main
       - develop
       - 'releases/**'
-  
+env:
+  USERNAME: ${{ secrets.LOGIN_USER }}
+  PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+  LANGUAGE: ${{ vars.LANGUAGE }}  
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
+      - run: echo "USERNAME is $USERNAME"
+      - run: echo "PASSWORD is $PASSWORD"
+      - run: echo "USERNAME is $LANGUAGE"
       - name: Checkout
         uses: actions/checkout@v4
       # Install npm dependencies, cache them correctly
@@ -19,10 +25,9 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
-          USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          LANGUAGE: ${{ secrets.LANGUAGE }}
-
+          USERNAME: ${{ secrets.LOGIN_USER }}
+          PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+          LANGUAGE: ${{ vars.LANGUAGE }}  
       - uses: actions/upload-artifact@v4
         # add the line below to store screenshots only on failures
         if: failure()
