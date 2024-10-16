@@ -6,11 +6,9 @@ on:
       - develop
       - 'releases/**'
 env:
-  USERNAME: ${{ vars.LOGIN_USER }}
-  PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-  LANGUAGE: ${{ vars.LANGUAGE }} 
-  CYPRESS_USERNAME: ${{ vars.LOGIN_USER }} 
-  CYPRESS_PASSWORD: ${{ secrets.LOGIN_PASSWORD }} 
+  T_USERNAME: ${{ vars.LOGIN_USER }}
+  T_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+  T_LANGUAGE: ${{ vars.LANGUAGE }} 
 
 jobs:
   cypress-run:
@@ -19,8 +17,6 @@ jobs:
       - run: echo "vars.LOGIN_USER is $USERNAME"
       - run: echo "secrets.LOGIN_PASSWORD is $PASSWORD"
       - run: echo "vars.LANGUAGE is $LANGUAGE"
-      - run: echo "CYPRESS_USERNAME->vars.LOGIN_USER is $CYPRESS_USERNAME"
-      - run: echo "CYPRESS_PASSWORD->secrets.LOGIN_PASSWORD is $CYPRESS_PASSWORD"
       - name: Checkout
         uses: actions/checkout@v4
       # Install npm dependencies, cache them correctly
@@ -30,8 +26,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         env:
-          CYPRESS_USERNAME: ${{ vars.LOGIN_USER }} 
-          CYPRESS_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
           USERNAME: ${{ vars.LOGIN_USER }}
           PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
           LANGUAGE: ${{ vars.LANGUAGE }}  
