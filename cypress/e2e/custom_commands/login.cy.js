@@ -4,8 +4,6 @@ describe('Login no Mantis', () => {
     
     const url_login = '/login_page.php';  
 
-    let language = Cypress.env('LANGUAGE');  
-
     beforeEach(() => {
       cy.fixture('users').as('users');
       cy.fixture('messages').as('messages');
@@ -31,7 +29,7 @@ describe('Login no Mantis', () => {
             .should('be.visible')
             .invoke('text') // Obtem o texto do elemento
             .then((text) => {
-              expect(text).to.equal(messages.loginErrorMessage[language]); 
+              expect(text).to.equal(messages.loginErrorMessage[Cypress.env('LANGUAGE')]); 
             });
             
         })        
