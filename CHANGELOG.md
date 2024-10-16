@@ -1,6 +1,6 @@
 ## Changelog
 
-### [Próxima Versão] - Data a definir
+### [0.1.1] - 10/10/2024 
 
 #### Adicionado
 - Criação do teste para login inválido [feature/CT02-login-invalido]

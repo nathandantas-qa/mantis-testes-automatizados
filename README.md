@@ -144,7 +144,6 @@ on:
       - main
       - develop
       - 'releases/**'
-
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
@@ -177,7 +176,6 @@ jobs:
           name: cypress-videos
           path: cypress/videos
           if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
-
 ```
 
 **Benefícios da CI:**
