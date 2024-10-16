@@ -7,7 +7,7 @@ const myViewPage = new MyViewPage();
 
 describe('Login no Mantis', () => {
  
-  let language = Cypress.env('LANGUAGE') || 'pt-BR';  
+  let language = Cypress.env('LANGUAGE') || 'pt-br';  
 
   beforeEach(() => {
     cy.fixture('users').as('users');

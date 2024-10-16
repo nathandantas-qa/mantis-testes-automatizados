@@ -42,7 +42,7 @@ class LoginPage {
     }
 
     verifyErrorMessage(text) {
-      cy.get(loginErrorMessageSelector)
+      cy.get(loginErrorMessageSelector, { timeout: 10000 })
       .should('be.visible')
       .invoke('text') // Obtem o texto do elemento
       .then((text) => {
