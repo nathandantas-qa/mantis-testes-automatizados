@@ -4,7 +4,7 @@ describe('Login no Mantis', () => {
     
     const url_login = '/login_page.php';  
 
-    let language = Cypress.env('LANGUAGE') || 'pt-br';  
+    let language = Cypress.env('LANGUAGE');  
 
     beforeEach(() => {
       cy.fixture('users').as('users');

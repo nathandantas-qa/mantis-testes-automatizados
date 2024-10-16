@@ -1,11 +1,9 @@
 /// <reference types="cypress" />
 
-
-
 describe('Login no Mantis', () => {
 
   const url_login = '/login_page.php';
-  let language = Cypress.env('LANGUAGE') || 'pt-br';   
+  let language = Cypress.env('LANGUAGE');   
 
   beforeEach(() => {
     cy.fixture('users').as('users');
@@ -31,7 +29,7 @@ describe('Login no Mantis', () => {
         cy.get('#password').should('be.visible').type(users.password_invalid);
         cy.get('.width-40').click({ force: true });
     
-        cy.get('.alert-danger > p')
+        cy.get('.alert-danger > p', { timeout: 10000 })
           .should('be.visible')
           .invoke('text') // Obtem o texto do elemento
           .then((text) => {
