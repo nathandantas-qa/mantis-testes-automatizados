@@ -7,7 +7,8 @@ const myViewPage = new MyViewPage();
 
 describe('Login no Mantis', () => {
  
-  
+  let language = Cypress.env('LANGUAGE');  
+
   beforeEach(() => {
     cy.fixture('users').as('users');
     cy.fixture('messages').as('messages');
@@ -24,6 +25,7 @@ describe('Login no Mantis', () => {
   
     cy.get('@users').then((users) => {
       cy.get('@messages').then((messages) => {
+       
         loginPage.visit()
         .fillFormAndSubmit(users.username_invalid, users.password_invalid);
        
