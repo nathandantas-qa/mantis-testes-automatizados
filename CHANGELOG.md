@@ -1,8 +1,9 @@
 ## Changelog
 
-### [0.1.1] - 10/10/2024 
+### [0.1.2] - 17/10/2024 
 
 #### Adicionado
+- Criação do teste para adicionar tarefas [feature/CT03-criar-tarefa]
 - Criação do teste para login inválido [feature/CT02-login-invalido]
 - Atualização da documentação do Readme.md, adicionado Estratégia de Testes [feature/planejar-tarefas]
 
