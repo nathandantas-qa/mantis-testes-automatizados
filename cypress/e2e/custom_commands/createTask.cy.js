@@ -4,14 +4,12 @@
 import TaskData from '../../support/models/task-data'; // Importar a classe TaskData
 describe('Criar tarefas', () => {
     const url_login = '/login_page.php';
-    const language = Cypress.env('LANGUAGE');  
-
+   
     beforeEach(() => {
         cy.fixture('tasks').as('tasks');
         cy.fixture('messages').as('messages');
 
-
-        cy.visit(url_login);
+        cy.visit('https://mantis-prova.base2.com.br/login_page.php');
         cy.login(Cypress.env('USERNAME'), Cypress.env('PASSWORD'));
         cy.url({ timeout: 10000 }).should('include', 'my_view_page.php');
 
