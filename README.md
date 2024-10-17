@@ -108,7 +108,7 @@ USERNAME=seu_usuario
 PASSWORD=sua_senha
 URL=https://mantis-prova.base2.com.br
 LANGUAGE=pt-BR # Define o idioma para português (Brasil)
-
+  
 5. **Execute os testes:**
    ```bash
    npx cypress open 
