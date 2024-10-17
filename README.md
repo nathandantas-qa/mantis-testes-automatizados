@@ -100,45 +100,34 @@ Os testes de API foram interrompidos por um problema na autenticação.
    ```bash
    npm install
    ```
-4. **Configure as variáveis de ambiente:**
-
-Crie um arquivo cypress.env.json na raiz do projeto e adicione as seguintes variáveis:
-
-USERNAME=seu_usuario
-PASSWORD=sua_senha
-URL=https://mantis-prova.base2.com.br
-LANGUAGE=pt-BR # Define o idioma para português (Brasil)
-
-5. **Execute os testes:**
+4. **Execute os testes:**
    ```bash
    npx cypress open 
    ```
 
 ### Integração Contínua com GitHub Actions
 
-A utilização do GitHub Actions para automatizar a execução dos testes em cada **push para a branch `develop` e em Pull Requests para a `main`**.  
+Este projeto utiliza GitHub Actions para automatizar a execução dos testes em cada **push para a branch `develop` e em Pull Requests para a `main`**.  
 
 **Para visualizar os resultados dos testes:**
 
 1. Acesse a página do repositório no GitHub.
 2. Clique na aba "Actions".
-3. Selecione o workflow "Teste Técnico".
+3. Selecione o workflow "Teste Técnico" (ou o nome do workflow que você configurou).
 4. Você poderá ver o histórico de execuções, o status dos testes e os logs detalhados.
 
-### Configuração de Variáveis de Ambiente
+**Configuração de Variáveis de Ambiente:**
 
-Para executar os testes no GitHub Actions, foi configurado as variáveis de ambiente:
+Para executar os testes no GitHub Actions, você precisa configurar as variáveis de ambiente:
 
 1. **Acesse a página do seu repositório no GitHub.**
 2. **Clique na aba "Settings".**
 3. **Selecione "Secrets" no menu lateral.**
 4. **Clique em "Add a new secret".**
-5. **Insira o nome da variável de ambiente (ex: `CYPRESS_ENV_CI`) e o valor.**
+5. **Insira o nome da variável de ambiente (ex: `USERNAME`, `PASSWORD`) e o valor.**
 6. **Clique em "Add secret".**
 
-**Criando o Arquivo `cypress.env.json`:**
-
-No workflow do GitHub Actions, localizada em ".github\workflows\ci.yml" foi incluido o código para criação do arquivo `cypress.env.json` para definir as variáveis de ambiente que serão utilizadas pelos testes do Cypress.
+No arquivo `ci.yml`, você pode acessar as variáveis de ambiente usando a sintaxe `${{ secrets.<nome-da-variável> }}`.  Por exemplo:
 
 ```yaml
 name: Teste Tecnico
@@ -148,38 +137,14 @@ on:
       - main
       - develop
       - 'releases/**'
-jobs:
-  cypress-run:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-     
-      - name: Install dependencies
-        run: npm install
-
-      - name: Write the cypress.env.json file 📝
-        # use quotes around the secret, as its value
-        # is simply inserted as a string into the command
-        run: |
-          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json  
-      
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        
-      - uses: actions/upload-artifact@v4
-        # add the line below to store screenshots only on failures
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
-      
-      - uses: actions/upload-artifact@v4
-        with:
-          name: cypress-videos
-          path: cypress/videos
-          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+env:
+  USERNAME: ${{ vars.VAR_USERNAME }} 
+  PASSWORD: ${{ vars.VAR_PASSWORD }}
+  SECRET_USERNAME: ${{ secrets.SECRET_USERNAME }} 
+  SECRET_PASSWORD: ${{ secrets.SECRET_PASSWORD }}
+  CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }} 
+  CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+  
 ```
 
 **Benefícios da CI:**
@@ -187,51 +152,3 @@ jobs:
 - **Execução Automática:**  Os testes são executados automaticamente em cada push, garantindo que o código esteja funcionando corretamente.
 - **Feedback Rápido:**  A equipe recebe feedback imediato sobre o status dos testes, o que permite identificar e corrigir problemas rapidamente.
 - **Cobertura de Testes:**  A CI garante que os testes sejam executados em todas as branches relevantes, aumentando a cobertura de testes e a qualidade do código.
-
-### Boas Práticas de Cypress
-
-Este projeto utiliza as seguintes boas práticas do Cypress para garantir a qualidade e a manutenabilidade dos testes:
-
-- **Aliases:** A aliases para compartilhar objetos entre hooks e testes, especialmente ao lidar com fixtures. Isso melhora a organização do código e evita a repetição de código.
-- **Page Objects:** O padrão Page Object para modularizar o código de teste e aumentar a reutilização. Isso torna o código mais fácil de entender, manter e atualizar.
-- **Comandos Customizados:** Comandos customizados para ações comuns, como login e criação de tarefas. Isso simplifica a escrita dos testes e evita a repetição de código.
-- **Fixtures:** Fixtures para armazenar dados de teste reutilizáveis, como informações de usuários e mensagens de erro. Isso centraliza os dados de teste e facilita a manutenção.
-- **Gerenciamento de Variáveis de Ambiente:** Utilizamos o `.cypress.env.json` e os `secrets` do GitHub Actions para armazenar informações sensíveis. Isso garante a segurança das informações e facilita a configuração do projeto.
-**Exemplos:**
-- **Alias para Fixture:**
-  ```javascript
-  cy.fixture('users.json').as('users');
-  ```
-- **Comando Customizado:**
-  ```javascript
-  Cypress.Commands.add('login', (username, password) => {
-    // ...
-  });
-  ```
-- **Page Object:**
-  ```javascript
-  class LoginPage {
-    // ...
-  }
-  ```
-- **Asserção:**
-  ```javascript
-  cy.get('.alert-danger > p').should('be.visible').and('contain', 'Mensagem de erro');
-  ```
-
-### Dificuldades e Soluções
-
-Durante o desenvolvimento do projeto, foram encontrado algumas dificuldades:
-
-1. **Configuração das Variáveis de Ambiente:**  A configuração das variáveis de ambiente do Cypress para serem utilizadas no GitHub Actions, garantindo a segurança da senha.
-    - **Problema:** Como definir a variável do GitHub com a mesma referência utilizada no arquivo cypress.env.json.
-    - **Solução:**  Uso do `secrets` do GitHub Actions para armazenar o json referente ao cypress.env.json, além de adicionar um script para criar o arquivo cypress.env.json durante o fluxo de CI.
-    - **Exemplo:**
-      ```yaml
-     - name: Write the cypress.env.json file 📝
-        run: |
-          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json  
-      ```
-2. **Configuração para Execução Local em Português (pt-BR) e no GitHub Actions em Inglês (en):**
-    - **Problema:** A execução local resultava no navegador configurado em pt-BR, enquanto no GitHub Actions o idioma padrão era en. Devido a essa diferença, ocorreram falhas nos testes, já que os textos esperados estavam em outro idioma.
-    - **Solução:**  Foi criado a variável de ambiente `LANGUAGE` para definir o idioma e criado a fixture messages.json para armazenar as mensagens de erro em diferentes idiomas.
