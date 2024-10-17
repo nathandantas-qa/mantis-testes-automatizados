@@ -53,8 +53,8 @@ Como este é um projeto de desafio, e não há requisitos específicos de negóc
 | Caso de Teste (CT)                                               | Tipo        | FC | FUC | AI | AP | Prioridade | Status       |
 |-------------------------------------------------------------------|-------------|----|-----|----|----|------------|--------------|
 | CT01 - Login com sucesso (UI)                                    | UI          | 5  | 5   | 5  | 5  | **125**     | Completo    |
-| CT03 - Criar tarefa com campos obrigatórios (UI)                 | UI          | 5  | 5   | 5  | 3  | **75**      | Em Andamento | 
-| CT05 - Criar tarefa via API (campos obrigatórios)                | API         | 5  | 5   | 5  | 3  | **75**      | Em Andamento |
+| CT03 - Criar tarefa com campos obrigatórios (UI)                 | UI          | 5  | 5   | 5  | 3  | **75**      | Completo | 
+| CT05 - Criar tarefa via API (campos obrigatórios)                | API         | 5  | 5   | 5  | 3  | **75**      | Bloqueio |
 | CT02 - Login com credenciais inválidas (UI)                       | UI          | 3  | 4   | 5  | 3  | **52.5**    | Completo     |
 | CT15 - Editar usuário via API                                   | API         | 4  | 2   | 4  | 3  | **36**      | A Fazer     |
 | CT06 - Criar tarefa via API (todos os campos)                     | API         | 4  | 4   | 4  | 2  | **32**      | A Fazer     |
