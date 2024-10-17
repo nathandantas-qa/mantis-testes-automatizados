@@ -17,7 +17,8 @@
         cy.get('#password').should('be.visible').type(Cypress.env('PASSWORD'), { log: false });
         cy.get('.width-40').click({ force: true });        
   })
-  
+})
+
   Cypress.Commands.add('createTask', (taskData) => {
     cy.get(':nth-child(3) > a > .menu-icon').should('be.visible').click(); // Clique no botão
     cy.get('#category_id').select(taskData.category); 

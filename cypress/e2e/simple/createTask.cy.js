@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
 describe('Criar tarefas', () => {
-    const url_login = '/login_page.php';
+  
     beforeEach(() => {
-        cy.visit(url_login);
+        cy.visit('https://mantis-prova.base2.com.br/login_page.php');
         cy.get('#username').should('be.visible').type(Cypress.env('USERNAME'));
         cy.get('.width-40').click({ force: true });
         cy.get('#password').should('be.visible').type(Cypress.env('PASSWORD'), { log: false });
